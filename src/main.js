@@ -7,8 +7,6 @@ import "izitoast/dist/css/iziToast.min.css";
 const myForm = document.querySelector(".form");
 const imagesList = document.querySelector('.images_container')
 
-// imagesList.style.flexWrap = 'wrap';
-
 myForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -66,18 +64,22 @@ function searchImage(query) {
 }
 
 function imageTemplate(image){
-    return `<img src="${image.webformatURL}" alt="${image.tags}>
+    return `
+    <div class="gallery_block">
+    <img src="${image.webformatURL}" alt="${image.tags}" class="picture">
     <ul class="property_list">
-    <li class="property_elem">Likes ${image.likes}</li>
-    <li class="property_elem>Views ${image.views}</li>
-    <li class="property_elem>Comments ${image.comments}</li>
-    <li class="property_elem>Downloads ${image.downloads}</li>
-    </ul>`;
+    <li class="property_elem">Likes <span class="span_property">${image.likes}</span></li>
+    <li class="property_elem">Views <span class="span_property">${image.views}</span></li>
+    <li class="property_elem">Comments <span class="span_property">${image.comments}</span></li>
+    <li class="property_elem">Downloads <span class="span_property">${image.downloads}</span></li>
+    </ul>
+    </div>`;
     
 }
 
 function imagesTemplate(arr) {
     return arr.map(imageTemplate).join('');
 }
+
 
 
