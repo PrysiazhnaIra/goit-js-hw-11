@@ -1,5 +1,5 @@
-// @import url('./js/pixabay-api.js');
-// @import url('./js/render-function.js');
+import {searchImage} from './js/pixabay-api.js';
+import {imagesTemplate} from './js/render-function.js';
 
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
@@ -26,7 +26,6 @@ myForm.addEventListener("submit", (event) => {
             message: 'You should input something',
             position: 'topCenter',
         });
-
 
     } else {
         spinner.hidden = false;
@@ -59,47 +58,11 @@ myForm.addEventListener("submit", (event) => {
             .finally(() => {
                 spinner.hidden = true;
             })
-    }  
-
-    
+    }    
 });
 
-function searchImage(query) {
-    const BASE_URL = 'https://pixabay.com/api/';
 
-    const params = new URLSearchParams({
-        key: '44028683-118753c7a8296875ea6775d6e',
-        q: query,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: 'true',
-        per_page: '9',
-    });
 
-    const url = `${BASE_URL}?${params}`;
-
-    return fetch(url)
-          .then(response => response.json());
-}
-
-function imageTemplate(image){
-    return `
-    <div class="gallery_block">
-    <a href="${image.largeImageURL}">
-    <img src="${image.webformatURL}" alt="${image.tags}" class="picture"></a>
-    <ul class="property_list">
-    <li class="property_elem">Likes <span class="span_property">${image.likes}</span></li>
-    <li class="property_elem">Views <span class="span_property">${image.views}</span></li>
-    <li class="property_elem">Comments <span class="span_property">${image.comments}</span></li>
-    <li class="property_elem">Downloads <span class="span_property">${image.downloads}</span></li>
-    </ul>
-    </div>`;
-    
-}
-
-function imagesTemplate(arr) {
-    return arr.map(imageTemplate).join('');
-}
 
 
 
